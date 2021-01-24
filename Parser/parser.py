@@ -25,6 +25,7 @@ M72	Restore modal state. (Requires prevous M70 call)
 # library
 import sys
 import gcodeCommands as gcom
+import gcodeDraw as gdraw
 
 # Reading individual G Code commands
 # Params: string
@@ -43,32 +44,35 @@ def read_Gcode(params):
         if gcom.g0(params[1:]) == -1:
             print("ERROR: break in G0")
             return -1
-            
+                    
     elif command == 'G1': 
         if gcom.g1(params[1:]) == -1:
             print("ERROR: break in G1")
             return -1
-            
+                    
     elif command == 'G2': 
         if gcom.g2(params[1:]) == -1:
             print("ERROR: break in G2")
             return -1
+        else:
+                gdraw.g2()
             
     elif command == 'G3': 
         if gcom.g3(params[1:]) == -1:
             print("ERROR: break in G3")
-            return -1
-             
+            return -1            
+                     
     elif command == 'G20': 
         if gcom.g20(params) == -1:
             print("ERROR: break in G20")
             return -1
+        
             
     elif command == 'G21': 
         if gcom.g21(params) == -1:
             print("ERROR: break in G21")
             return -1
-            
+        
     elif command == 'G90': 
         if gcom.g90(params) == -1:
             print("ERROR: break in G90")
