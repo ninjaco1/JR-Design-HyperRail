@@ -54,8 +54,6 @@ def read_Gcode(params):
         if gcom.g2(params[1:]) == -1:
             print("ERROR: break in G2")
             return -1
-        else:
-                gdraw.g2()
             
     elif command == 'G3': 
         if gcom.g3(params[1:]) == -1:

@@ -1,6 +1,16 @@
 #G code commands
 import sys
 
+mode = 'inc'        # default incremental, set to 'abs' for absolute
+unit = 'inch'       # default unit, set to 'mm' for millimeters
+
+#Parameter definitions: 
+#   X:      x-coordinate or distance
+#   Y:      y-coordinate or distance
+#   fr:     Feed rate 
+#   unit:   current units (default = inches)
+#   mode:   current mode (default = relative)
+
 # G0:
 def g0(para):
     if len(para) != 2:
@@ -51,7 +61,8 @@ def m2(para):
 
 # M6:
 def m6(para):
-    
+
+    gdraw.m6()
     pass
     
 # M72:
