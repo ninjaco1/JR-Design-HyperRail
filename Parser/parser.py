@@ -20,12 +20,26 @@ M2	Ends program. Resets origin offset, and does the following actions:
     Current motion mode is set to feed (Like G1)
 M6	Tool change. Stops tool and prompts user to change tool.
 M72	Restore modal state. (Requires prevous M70 call)
+T   Set tool # to switch to.
 """
 
 # library
 import sys
 import gcodeCommands as gcom
 import gcodeDraw as gdraw
+
+class ToolParams:
+    def __init__(self):
+        self.x = 0
+        self.y = 0
+        self.fr = 6             #default max. feedrate. 6"/sec
+        self.mode = "inc"       #default incremental
+        self.unit = "inch"      #default inches
+        self.currTool = 0       #current tool
+        self.nextTool = 0       #next tool
+
+    def foo(self):
+        pass
 
 # Reading individual G Code commands
 # Params: string
@@ -40,56 +54,59 @@ def read_Gcode(params):
     params = temp
     command = params[0]
 
-    if command == 'G0':  
-        if gcom.g0(params[1:]) == -1:
+    if command == 'G0':
+        tool.x, tool.y = params[1], params[2]
+        if gcom.g0(tool) == -1 or len(params) != 2:
             print("ERROR: break in G0")
             return -1
                     
-    elif command == 'G1': 
-        if gcom.g1(params[1:]) == -1:
+    elif command == 'G1':
+        tool.x, tool.y, tool.fr = params[1], params[2], params[3]
+        if gcom.g1(tool) == -1 or len(params) != 3:
             print("ERROR: break in G1")
             return -1
                     
-    elif command == 'G2': 
-        if gcom.g2(params[1:]) == -1:
+    elif command == 'G2':
+        tool.x, tool.y, tool.fr = params[1], params[2], params[5]
+        if gcom.g2(tool, params[3], params[4]) == -1 or len(params) != 5:
             print("ERROR: break in G2")
             return -1
             
     elif command == 'G3': 
-        if gcom.g3(params[1:]) == -1:
-            print("ERROR: break in G3")
-            return -1            
+        tool.x, tool.y, tool.fr = params[1], params[2], params[5]
+        if gcom.g3(tool, params[3], params[4]) == -1 or len(params) != 5:
+            print("ERROR: break in G2")
+            return -1         
                      
     elif command == 'G20': 
-        if gcom.g20(params) == -1:
+        if gcom.g20(tool) == -1 or len(params) != 0:
             print("ERROR: break in G20")
             return -1
         
-            
     elif command == 'G21': 
-        if gcom.g21(params) == -1:
+        if gcom.g21(tool) == -1 or len(params) != 0:
             print("ERROR: break in G21")
             return -1
         
     elif command == 'G90': 
-        if gcom.g90(params) == -1:
+        if gcom.g90(tool) == -1 or len(params) != 0:
             print("ERROR: break in G90")
             return -1
-                
+    
     elif command == 'G91': 
-        if gcom.g91(params) == -1:
+        if gcom.g91(tool) == -1:
             print("ERROR: break in G91")
             return -1
                 
     elif command == 'M2': 
-        if gcom.m2(params) == -1:
+        if gcom.m2(tool) == -1:
             print("ERROR: break in M2")
             return -1
         else:
             return False #Exit
                     
-    elif command == 'M6': 
-        if gcom.m6(command) == -1:
+    elif command == 'M6':
+        if gcom.m6(tool) == -1:
             print("ERROR: break in M6")
             return -1
                 
@@ -97,7 +114,13 @@ def read_Gcode(params):
         if gcom.m72(command) == -1:
             print("ERROR: break in M72")
             return -1
-                    
+            
+    elif command[0] == 'T':
+        if command[1].isdigit() == False and 0 <= command[1] <= 3: 
+            print("ERROR: Invalid T target")
+        elif 0 <= command[1] and command[1] <= 3:
+            tool.nextTool = command[1]
+                      
     else:
         print("ERROR: Command %s not found" % command)
         return -1
@@ -116,10 +139,9 @@ def read_File(f):
     return f_len                      # returns length of file once complete
     
 
+Tool = ToolParams()
 # main 
 if __name__ == "__main__": 
-    # gcom.g0()
-    
     # GUI
     while True:
         val = input("Manual or Auto: ")
