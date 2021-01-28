@@ -55,72 +55,110 @@ def read_Gcode(params):
     command = params[0]
 
     if command == 'G0':
-        tool.x, tool.y = params[1], params[2]
-        if gcom.g0(tool) == -1 or len(params) != 2:
-            print("ERROR: break in G0")
-            return -1
+        if len(params) == 3:
+            tool.x, tool.y = float(params[1][1:]), float(params[2][1:])
+            # print(f"tool.x = {tool.x}, tool.y = {tool.y}")
+            if gcom.g0(tool) == -1:
+                print("ERROR: break in G0")
+                return -1
+        else:
+            print ("ERROR: Wrong number of params in G0")
                     
     elif command == 'G1':
-        tool.x, tool.y, tool.fr = params[1], params[2], params[3]
-        if gcom.g1(tool) == -1 or len(params) != 3:
-            print("ERROR: break in G1")
-            return -1
+        if len(params) == 4:
+            tool.x, tool.y, tool.fr = float(params[1][1:]), float(params[2][1:]), float(params[3][1:])
+            if gcom.g1(tool) == -1:
+                print("ERROR: break in G1")
+                return -1
+        else:
+            print ("ERROR: Wrong number of params in G1")
                     
     elif command == 'G2':
-        tool.x, tool.y, tool.fr = params[1], params[2], params[5]
-        if gcom.g2(tool, params[3], params[4]) == -1 or len(params) != 5:
-            print("ERROR: break in G2")
-            return -1
+        if len(params) == 6:
+            tool.x, tool.y, tool.fr = float(params[1][1:]), float(params[2][1:]), float(params[5][1:])
+            if gcom.g2(tool, float(params[3][1:]), float(params[4][1:])) == -1:
+                print("ERROR: break in G2")
+                return -1
+        else:
+            print ("ERROR: Wrong number of params in G2")
             
-    elif command == 'G3': 
-        tool.x, tool.y, tool.fr = params[1], params[2], params[5]
-        if gcom.g3(tool, params[3], params[4]) == -1 or len(params) != 5:
-            print("ERROR: break in G2")
-            return -1         
-                     
-    elif command == 'G20': 
-        if gcom.g20(tool) == -1 or len(params) != 0:
-            print("ERROR: break in G20")
-            return -1
+    elif command == 'G3':
+        if len(params) == 6:
+            tool.x, tool.y, tool.fr = float(params[1][1:]), float(params[2][1:]), float(params[5][1:])
+            if gcom.g3(tool, float(params[3][1:]), float(params[4][1:])) == -1:
+                print("ERROR: break in G3")
+                return -1
+        else:
+            print ("ERROR: Wrong number of params in G3")
+
+    elif command == 'G20':
+        if len(params) == 1:
+            # print("length params in G20: ", params, len(params))
+            if gcom.g20(tool) == -1:
+                print("ERROR: break in G20")
+                return -1
+        else:
+            print ("ERROR: Wrong number of params in G20")
         
-    elif command == 'G21': 
-        if gcom.g21(tool) == -1 or len(params) != 0:
-            print("ERROR: break in G21")
-            return -1
+    elif command == 'G21':
+        if len(params) == 1:
+            if gcom.g21(tool) == -1:
+                print("ERROR: break in G21")
+                return -1
+        else:
+            print ("ERROR: Wrong number of params in G21")
         
-    elif command == 'G90': 
-        if gcom.g90(tool) == -1 or len(params) != 0:
-            print("ERROR: break in G90")
-            return -1
+    elif command == 'G90':
+        if len(params) == 1:
+            if gcom.g90(tool) == -1:
+                print("ERROR: break in G90")
+                return -1
+        else:
+            print ("ERROR: Wrong number of params in G90")
     
     elif command == 'G91': 
-        if gcom.g91(tool) == -1:
-            print("ERROR: break in G91")
-            return -1
+        if len(params) == 1:
+            if gcom.g91(tool) == -1:
+                print("ERROR: break in G91")
+                return -1
+        else:
+            print ("ERROR: Wrong number of params in G90")
                 
     elif command == 'M2': 
-        if gcom.m2(tool) == -1:
-            print("ERROR: break in M2")
-            return -1
+        if len(params) == 1:
+            if gcom.m2(tool) == -1:
+                print("ERROR: break in M2")
+                return -1
+            else:
+                return False #Exit
         else:
-            return False #Exit
+            print ("ERROR: Wrong number of params in M2")
                     
     elif command == 'M6':
-        if gcom.m6(tool) == -1:
-            print("ERROR: break in M6")
-            return -1
+        if len(params) == 1:
+            if gcom.m6(tool) == -1:
+                print("ERROR: break in M6")
+                return -1
+        else:
+            print ("ERROR: Wrong number of params in M6")
                 
     elif command == 'M72': 
-        if gcom.m72(command) == -1:
-            print("ERROR: break in M72")
-            return -1
-            
+        if len(params) == 1:
+            if gcom.m72(command) == -1:
+                print("ERROR: break in M72")
+                return -1
+        else:
+            print ("ERROR: Wrong number of params in M72")
+
     elif command[0] == 'T':
-        if command[1].isdigit() == False and 0 <= command[1] <= 3: 
-            print("ERROR: Invalid T target")
-        elif 0 <= command[1] and command[1] <= 3:
-            tool.nextTool = command[1]
-                      
+        if len(params) == 1:
+            if command[1:].isdigit() == False: 
+                print("ERROR: Invalid T target")
+            elif 0 <= int(command[1:]) and int(command[1:]) <= 3:
+                tool.nextTool = int(command[1:])
+        else:
+            print ("ERROR: Wrong number of params in T")
+
     else:
         print("ERROR: Command %s not found" % command)
         return -1
@@ -139,11 +177,12 @@ def read_File(f):
     return f_len                      # returns length of file once complete
     
 
-Tool = ToolParams()
+tool = ToolParams()
 # main 
 if __name__ == "__main__": 
     # GUI
     while True:
+        print("Type 'Exit' to quit the program.")
         val = input("Manual or Auto: ")
         if val.lower() == "manual":
             # Manual mode: loops and reads user input as gcode
@@ -156,16 +195,23 @@ if __name__ == "__main__":
                     # print("user_in: " + str(temp))
                     condition = read_Gcode(user_in)
                     if condition == -1 or condition == False:
-                        print("Program terminating.")
-                        sys.exit()
+                        print("Error: Could not execute.")
                     
         # Auto mode: read from a TXT or GCO file    
         elif val.lower() == "auto":
             file_name = input("File name/path: ")
             condition = read_File(file_name)
-            if condition == -1 or condition == False:
+            if condition == -1:
                 print("Program terminating.")
-                sys.exit()
+                break
+            elif condition == False:
+                print("Program succesfully ran. Terminating.")
+                # Continue loop, prompt user for manual or auto.
+                continue
+        elif val.lower() == "exit":
+            print("Program terminating.")
+            break
+
             
 
 
