@@ -2238,13 +2238,15 @@ nominal inductance</description>
 <part name="CBOOT" library="Components" deviceset="CAPACITOR" device="-0603" value="100nF"/>
 <part name="COUT_2" library="Components" deviceset="CAPACITOR" device="-0603" value="10uF"/>
 <part name="COUT" library="Components" deviceset="CAPACITOR" device="-0603" value="10uF"/>
-<part name="RFBT" library="Components" deviceset="RESISTOR" device="-0603" value="111k"/>
+<part name="RFBT" library="Components" deviceset="RESISTOR" device="-0603" value="100k"/>
 <part name="RFBB" library="Components" deviceset="RESISTOR" device="-0603" value="20k"/>
 <part name="D1" library="Components" deviceset="DIODE" device="-DFN0603-2" value="550mV"/>
 <part name="L2" library="inductor-neosid" library_urn="urn:adsk.eagle:library:241" deviceset="SD8" device="" package3d_urn="urn:adsk.eagle:package:14649/1" value="22uH"/>
 <part name="SUPPLY4" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="SUPPLY5" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="SUPPLY6" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
+<part name="R1" library="Components" deviceset="RESISTOR" device="-0603" value="10k"/>
+<part name="R2" library="Components" deviceset="RESISTOR" device="-0603" value="1k"/>
 </parts>
 <sheets>
 <sheet>
@@ -2304,9 +2306,9 @@ nominal inductance</description>
 <attribute name="NAME" x="231.902" y="62.484" size="1.778" layer="95"/>
 <attribute name="VALUE" x="232.664" y="60.96" size="1.778" layer="96" align="top-left"/>
 </instance>
-<instance part="RFBT" gate="G$1" x="204.47" y="74.676" smashed="yes" rot="R90">
-<attribute name="NAME" x="208.0514" y="75.946" size="1.778" layer="95"/>
-<attribute name="VALUE" x="207.772" y="73.406" size="1.778" layer="96"/>
+<instance part="RFBT" gate="G$1" x="204.47" y="79.756" smashed="yes" rot="R90">
+<attribute name="NAME" x="208.0514" y="81.026" size="1.778" layer="95"/>
+<attribute name="VALUE" x="207.772" y="78.486" size="1.778" layer="96"/>
 </instance>
 <instance part="RFBB" gate="G$1" x="204.47" y="42.164" smashed="yes" rot="R90">
 <attribute name="NAME" x="208.0514" y="43.434" size="1.778" layer="95"/>
@@ -2328,6 +2330,14 @@ nominal inductance</description>
 </instance>
 <instance part="SUPPLY6" gate="GND" x="133.604" y="27.94" smashed="yes">
 <attribute name="VALUE" x="131.699" y="24.765" size="1.778" layer="96"/>
+</instance>
+<instance part="R1" gate="G$1" x="204.47" y="69.596" smashed="yes" rot="R90">
+<attribute name="NAME" x="207.0354" y="70.358" size="1.778" layer="95"/>
+<attribute name="VALUE" x="206.756" y="67.818" size="1.778" layer="96"/>
+</instance>
+<instance part="R2" gate="G$1" x="204.47" y="59.436" smashed="yes" rot="R90">
+<attribute name="NAME" x="206.7814" y="59.944" size="1.778" layer="95"/>
+<attribute name="VALUE" x="206.502" y="57.404" size="1.778" layer="96"/>
 </instance>
 </instances>
 <busses>
@@ -2357,9 +2367,9 @@ nominal inductance</description>
 <wire x1="204.47" y1="49.784" x2="204.47" y2="49.53" width="0" layer="91"/>
 <pinref part="RFBB" gate="G$1" pin="2"/>
 <wire x1="204.47" y1="47.244" x2="204.47" y2="49.784" width="0.1524" layer="91"/>
-<wire x1="204.47" y1="66.04" x2="204.47" y2="49.53" width="0" layer="91"/>
-<pinref part="RFBT" gate="G$1" pin="1"/>
-<wire x1="204.47" y1="69.596" x2="204.47" y2="49.53" width="0.1524" layer="91"/>
+<pinref part="R2" gate="G$1" pin="1"/>
+<wire x1="204.47" y1="54.356" x2="204.47" y2="49.784" width="0.1524" layer="91"/>
+<junction x="204.47" y="49.784"/>
 </segment>
 <segment>
 <pinref part="LMR14010ADDC" gate="1" pin="FB@3"/>
@@ -2378,7 +2388,7 @@ nominal inductance</description>
 <net name="5" class="0">
 <segment>
 <pinref part="RFBT" gate="G$1" pin="2"/>
-<wire x1="204.47" y1="79.756" x2="204.47" y2="86.36" width="0.1524" layer="91"/>
+<wire x1="204.47" y1="84.836" x2="204.47" y2="86.36" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="L2" gate="G$1" pin="2"/>
@@ -2440,34 +2450,12 @@ nominal inductance</description>
 <wire x1="247.65" y1="54.102" x2="247.65" y2="50.8" width="0.1524" layer="91"/>
 <wire x1="247.65" y1="50.8" x2="229.87" y2="50.8" width="0.1524" layer="91"/>
 <pinref part="IOUT" gate="1" pin="-@2"/>
-<wire x1="29.21" y1="30.48" x2="54.61" y2="30.48" width="0" layer="91"/>
 <wire x1="54.61" y1="30.48" x2="133.604" y2="30.48" width="0" layer="91"/>
 <wire x1="133.604" y1="30.48" x2="229.87" y2="30.48" width="0" layer="91"/>
 <wire x1="229.87" y1="30.48" x2="278.13" y2="30.48" width="0" layer="91"/>
 <wire x1="278.13" y1="30.48" x2="278.13" y2="43.18" width="0" layer="91"/>
-<wire x1="29.21" y1="58.166" x2="29.21" y2="58.42" width="0" layer="91"/>
-<pinref part="TP1" gate="G$1" pin="TP"/>
-<wire x1="35.56" y1="116.84" x2="35.56" y2="114.3" width="0.1524" layer="91"/>
-<pinref part="J1" gate="G$1" pin="1"/>
-<wire x1="20.32" y1="114.3" x2="35.56" y2="114.3" width="0.1524" layer="91"/>
-<junction x="35.56" y="114.3"/>
-<wire x1="35.56" y1="114.3" x2="35.56" y2="93.98" width="0.1524" layer="91"/>
-<junction x="35.56" y="93.98"/>
-<pinref part="LMR14010ADDC" gate="1" pin="VIN@5"/>
-<wire x1="77.47" y1="93.98" x2="54.61" y2="93.98" width="0.1524" layer="91"/>
-<pinref part="CIN" gate="G$1" pin="2"/>
-<wire x1="54.61" y1="71.12" x2="54.61" y2="93.98" width="0.1524" layer="91"/>
-<wire x1="54.61" y1="93.98" x2="35.56" y2="93.98" width="0.1524" layer="91"/>
-<pinref part="SV1" gate="G$1" pin="3"/>
-<wire x1="0" y1="93.98" x2="29.21" y2="93.98" width="0.1524" layer="91"/>
-<wire x1="29.21" y1="93.98" x2="35.56" y2="93.98" width="0.1524" layer="91"/>
-<junction x="29.21" y="93.98"/>
-<wire x1="29.21" y1="93.98" x2="29.21" y2="58.166" width="0.1524" layer="91"/>
-<wire x1="29.21" y1="58.166" x2="29.21" y2="30.48" width="0.1524" layer="91"/>
-<junction x="29.21" y="58.166"/>
 <pinref part="CIN" gate="G$1" pin="1"/>
 <wire x1="54.61" y1="60.96" x2="54.61" y2="30.48" width="0.1524" layer="91"/>
-<junction x="54.61" y="30.48"/>
 <wire x1="229.87" y1="50.8" x2="229.87" y2="30.48" width="0.1524" layer="91"/>
 <junction x="229.87" y="50.8"/>
 <junction x="229.87" y="30.48"/>
@@ -2482,6 +2470,41 @@ nominal inductance</description>
 <wire x1="167.64" y1="86.36" x2="113.03" y2="86.36" width="0.1524" layer="91"/>
 <pinref part="LMR14010ADDC" gate="1" pin="SW@6"/>
 <junction x="113.03" y="86.36"/>
+</segment>
+</net>
+<net name="N$1" class="0">
+<segment>
+<pinref part="TP1" gate="G$1" pin="TP"/>
+<wire x1="35.56" y1="116.84" x2="35.56" y2="114.3" width="0.1524" layer="91"/>
+<pinref part="J1" gate="G$1" pin="1"/>
+<wire x1="20.32" y1="114.3" x2="35.56" y2="114.3" width="0.1524" layer="91"/>
+<junction x="35.56" y="114.3"/>
+<wire x1="35.56" y1="114.3" x2="35.56" y2="93.98" width="0.1524" layer="91"/>
+<junction x="35.56" y="93.98"/>
+<pinref part="LMR14010ADDC" gate="1" pin="VIN@5"/>
+<wire x1="77.47" y1="93.98" x2="54.61" y2="93.98" width="0.1524" layer="91"/>
+<pinref part="CIN" gate="G$1" pin="2"/>
+<wire x1="54.61" y1="71.12" x2="54.61" y2="93.98" width="0.1524" layer="91"/>
+<wire x1="54.61" y1="93.98" x2="35.56" y2="93.98" width="0.1524" layer="91"/>
+<pinref part="SV1" gate="G$1" pin="3"/>
+<wire x1="0" y1="93.98" x2="35.56" y2="93.98" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$3" class="0">
+<segment>
+<wire x1="29.21" y1="58.166" x2="29.21" y2="58.42" width="0" layer="91"/>
+</segment>
+</net>
+<net name="N$4" class="0">
+<segment>
+<pinref part="RFBT" gate="G$1" pin="1"/>
+<pinref part="R1" gate="G$1" pin="2"/>
+</segment>
+</net>
+<net name="N$5" class="0">
+<segment>
+<pinref part="R1" gate="G$1" pin="1"/>
+<pinref part="R2" gate="G$1" pin="2"/>
 </segment>
 </net>
 </nets>
