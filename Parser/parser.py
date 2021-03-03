@@ -23,6 +23,9 @@ M72	Restore modal state. (Requires prevous M70 call)
 T   Set tool # to switch to.
 """
 
+# python C:\Users\Anthony\Desktop\school\ECE342\JR-Design-HyperRail\Parser\parser.py
+# C:\Users\Anthony\Desktop\school\ECE342\JR-Design-HyperRail\Parser\gtext.txt
+
 # library
 import sys
 import gcodeCommands as gcom
