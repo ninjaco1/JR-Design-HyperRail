@@ -1,10 +1,22 @@
 import turtle
 import math
+import tkinter 
+
+
+# canvas 
+root = tkinter.Tk()
+root.geometry('500x500-5+40') #added by me
+cv = turtle.ScrolledCanvas(root, width=1920, height=1000)
+cv.pack()
+
+# screen size 
+screen = turtle.TurtleScreen(cv)
+screen.screensize(20000,20000)
 
 # Initialize pen and variables
-pen = turtle.Turtle()
+pen = turtle.RawTurtle(screen)
 pen.color('black')
-pen.pensize('3')
+pen.pensize('2')
 # pen.shape("circle")
 # pen.speed("")
 
@@ -27,7 +39,8 @@ def line(x, y, fr, mode, unit):
     if mode == "abs":   #abs
         pen.goto(x,y)   # go to (x,y)
     else:               #rel
-        pen.goto(x+pen.xcor(),y+pen.ycor()) 
+        pen.goto(x+pen.xcor(),y+pen.ycor())
+    pen.getscreen()
  
 def arc(x, y, i, j, fr, mode, dir, unit): #CW (G3) if dir == 1, CCW (G2) if dir == -1
     fr = 0.5 + float(0.01 * fr)
@@ -98,9 +111,10 @@ def arc(x, y, i, j, fr, mode, dir, unit): #CW (G3) if dir == 1, CCW (G2) if dir 
     pen.seth(th_h)
     pen.speed(fr)
     pen.circle(dir*rad, theta)
+    pen.getscreen()
 
 def m6(num):
-    tools = ["black", "red", "green", "blue"]
+    tools = ["black", "red", "green", "blue","white"]
     pen.color(tools[num]) # selecting a pen color
 
 

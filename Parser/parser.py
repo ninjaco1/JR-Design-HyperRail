@@ -55,11 +55,14 @@ def read_Gcode(params):
     temp.append(params)
     temp = [i for item in temp for i in item.split()]
     params = temp
+    if len(params) == 0:
+        return
     command = params[0]
+    scale = 10
 
     if command == 'G0':
         if len(params) == 3:
-            tool.x, tool.y = float(params[1][1:]), float(params[2][1:])
+            tool.x, tool.y = float(params[1][1:])/scale, float(params[2][1:])/scale
             # print(f"tool.x = {tool.x}, tool.y = {tool.y}")
             if gcom.g0(tool) == -1:
                 print("ERROR: break in G0")
@@ -69,7 +72,7 @@ def read_Gcode(params):
                     
     elif command == 'G1':
         if len(params) == 4:
-            tool.x, tool.y, tool.fr = float(params[1][1:]), float(params[2][1:]), float(params[3][1:])
+            tool.x, tool.y, tool.fr = float(params[1][1:])/scale, float(params[2][1:])/scale, float(params[3][1:])/scale
             if gcom.g1(tool) == -1:
                 print("ERROR: break in G1")
                 return -1
@@ -78,8 +81,8 @@ def read_Gcode(params):
                     
     elif command == 'G2':
         if len(params) == 6:
-            tool.x, tool.y, tool.fr = float(params[1][1:]), float(params[2][1:]), float(params[5][1:])
-            if gcom.g2(tool, float(params[3][1:]), float(params[4][1:])) == -1:
+            tool.x, tool.y, tool.fr = float(params[1][1:])/scale, float(params[2][1:])/scale, float(params[5][1:])/scale
+            if gcom.g2(tool, float(params[3][1:])/scale, float(params[4][1:])/scale) == -1:
                 print("ERROR: break in G2")
                 return -1
         else:
@@ -87,8 +90,8 @@ def read_Gcode(params):
             
     elif command == 'G3':
         if len(params) == 6:
-            tool.x, tool.y, tool.fr = float(params[1][1:]), float(params[2][1:]), float(params[5][1:])
-            if gcom.g3(tool, float(params[3][1:]), float(params[4][1:])) == -1:
+            tool.x, tool.y, tool.fr = float(params[1][1:])/scale, float(params[2][1:])/scale, float(params[5][1:])/scale
+            if gcom.g3(tool, float(params[3][1:])/scale, float(params[4][1:])/scale) == -1:
                 print("ERROR: break in G3")
                 return -1
         else:
