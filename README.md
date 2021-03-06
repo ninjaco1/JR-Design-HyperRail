@@ -46,6 +46,8 @@ The G-Code commands must have the right parameters/arguments plus the command or
 
 [G-Code Parser in Python3 Demo Video](https://drive.google.com/file/d/1lWumYBpXrusXX2kpaQBLoHpFK_WG9Xnz/view?usp=sharing)
 
+[G-Code Parser in MATLAB Demo Video](https://drive.google.com/file/d/1U7hCthpk_3eQoVkrieUcnGUcYebdRAjs/view?usp=sharing)
+
 ## Picture of PCB and Toolhead 
 
 [Picture of PCB layers and toolhead link](https://drive.google.com/file/d/1GoM_6qORbHdATiaQWWme-YfhqsItHQLZ/view?usp=sharing)
