@@ -11,7 +11,7 @@ Currently don't have at the moment:
 PDF for the project summary: 
 [Project Summary](https://docs.google.com/document/d/1FK-zv3ej4hmk3cCyDUM1-cvGXo1tJJXo0p-roIx5XGc/edit?usp=sharing)
 
-Steps on how to this project running: 
+Steps on how to this project runs: 
 [Developer Guide](https://drive.google.com/file/d/1b8bf6LgNn7jMLtsA6zKb3VHLeMdlCe0p/view?usp=sharing)
 
 [Design Presentation Slides](https://docs.google.com/presentation/d/1P-iVZDowQR9feOQwt1mziY3U6oYqxVLCjaJKAJ0mzws/edit?usp=sharing)
