@@ -27,7 +27,7 @@ First change Directories so that you are in the `EdgeDetection` directory. Befor
 ```python 
 img = cv2.imread('path/to/image.png',0)
 ```
-. Make sure it the correct path to the image that you want the edge detection that you want to do it on. Afterwards run `python3 edgeDetection.py`. At the end it will show the edge detection picture compared to the original one which was in gray, and a generated G-Code command text file called `gcode.txt`.
+. Make sure to update the file path to the image that you wish to perform edge detection on. Afterwards run `python3 edgeDetection.py`. At the end it will show the edge detection picture compared to the original one which was in gray, and a generated G-Code command text file called `gcode.txt`.
 [Edge Detection Demo in Python3](https://drive.google.com/file/d/1J3HoQEe9SpAp14uiTM5HVKii-mfcHyuJ/view?usp=sharing)
 
 To run this file make sure you are using some type of Python Interpreter otherwise it will not work. Change directory to `Parser`. To run the script run `python3 parser.py`. Then it will ask if you want to to run in manual mode or auto mode.
@@ -50,8 +50,8 @@ The G-Code commands must have the right parameters/arguments plus the command or
 
 ## Picture of PCB and Toolhead 
 
-[Picture of PCB layers and toolhead link](https://drive.google.com/file/d/1GoM_6qORbHdATiaQWWme-YfhqsItHQLZ/view?usp=sharing)
+[Google Drive folder with images of PCB layers and toolhead](https://drive.google.com/drive/folders/1xzrkDD5itXDCg26j8iZeH8htb0uEpJzJ?usp=sharing)
 
-## Bill of Material 
+## Bill of Materials 
 
 [BOM](https://drive.google.com/file/d/1bA2rW0vcZreU9mbd2lWcmnBElYSLbTTa/view?usp=sharing)
